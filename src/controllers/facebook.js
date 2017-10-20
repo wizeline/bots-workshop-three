@@ -1,4 +1,5 @@
 const requestPromise = require('request-promise');
+const conversationHandler = require('../helpers/conversationHandler');
 
 const isSubscribe = mode => mode === 'subscribe';
 const isTokenValid = token => token === process.env.FB_VERIFY_TOKEN;
@@ -51,8 +52,13 @@ const receivedMessage = (event) => {
   const text = event.message.text;
 
   // Do something magical
+  const processedMessage = conversationHandler.process(text);
 
-  sendTextMessage(senderId, text);
+  processedMessage.then(response => {
+    sendTextMessage(senderId, response);
+  }).catch(error => {
+    sendTextMessage(senderId, error);
+  });
 };
 
 const sendTextMessage = (senderId, text) => {
