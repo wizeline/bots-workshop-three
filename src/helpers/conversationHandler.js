@@ -3,7 +3,7 @@ const GREETINGS = ['hi', 'hey', 'hola', 'que onda', 'howdy'];
 
 const isGreeting = text => GREETINGS.includes(text.toLowerCase());
 
-const getByName = term => {
+const getBypokemon = term => {
   pokedex.getPokemonByName(term).then(pokemon => {
     const { name, weight, height, base_experience: baseXp } = pokemon;
     
@@ -13,6 +13,23 @@ const getByName = term => {
       Height: ${height}
       Base XP: ${baseXp}
     `;
+
+    console.log(message);
+
+    return message;
+  }).catch(error => 'I\'m sorry, but that pokemon doesn\'t exist. 😟');
+};
+
+const getBytype = term => {
+  pokedex.getTypeByType(term).then(pokemon => {
+    // const { name, weight, height, base_experience: baseXp } = pokemon;
+
+    // const message = `
+    //   Pokemon name: ${name}
+    //   Weight: ${weight}
+    //   Height: ${height}
+    //   Base XP: ${baseXp}
+    // `;
 
     console.log(message);
 
