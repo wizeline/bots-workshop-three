@@ -1,5 +1,6 @@
 const requestPromise = require('request-promise');
 const conversationHandler = require('../helpers/conversationHandler');
+const Wit = require('../adapters/wit');
 
 const isSubscribe = mode => mode === 'subscribe';
 const isTokenValid = token => token === process.env.FB_VERIFY_TOKEN;
@@ -52,12 +53,15 @@ const receivedMessage = (event) => {
   const text = event.message.text;
 
   // Do something magical
-  const processedMessage = conversationHandler.process(text);
+  const entities = Wit.getEntities(text);
+  entities.then(entities => {
+    const processedMessage = conversationHandler.process(text, entities);
 
-  processedMessage.then(response => {
-    sendTextMessage(senderId, response);
-  }).catch(error => {
-    sendTextMessage(senderId, error);
+    processedMessage.then(response => {
+      sendTextMessage(senderId, response);
+    }).catch(error => {
+      sendTextMessage(senderId, error);
+    });
   });
 };
 

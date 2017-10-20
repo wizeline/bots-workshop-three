@@ -20,12 +20,12 @@ const getByName = term => {
   }).catch(error => 'I\'m sorry, but that pokemon doesn\'t exist. 😟');
 };
 
-const process = text => {
+const process = (text, entities) => {
   if(isGreeting(text)) {
     return Promise.resolve(`Hi there mate 👋🏻`)
   }
 
-  return getByName(text);
+  return [`getBy${entities.intent}`](entities.subject);
 };
 
 module.exports = {
