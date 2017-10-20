@@ -64,7 +64,7 @@ const receivedMessage = (event) => {
 const sendTextMessage = (senderId, text) => {
   const message = {
     recipient: {
-      id: recipientId
+      id: senderId
     },
     message: {
       text
@@ -78,7 +78,7 @@ const callSendAPI = (message) => {
   requestPromise({
     uri: 'https://graph.facebook.com/v2.6/me/messages',
     qs: {
-      access_token: process.env.PAGE_ACCESS_TOKEN
+      access_token: process.env.FB_PAGE_ACCESS_TOKEN
     },
     method: 'POST',
     json: message
@@ -95,5 +95,6 @@ const callSendAPI = (message) => {
 };
 
 module.exports = {
-  getWebhook
+  getWebhook,
+  postWebhook
 };

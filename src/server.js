@@ -5,6 +5,8 @@ require('dotenv').load();
 
 const facebookRouter = require('./routes/facebook');
 
+const port = 3000;
+
 const app = express();
 app.use(bodyParser.json());
 
@@ -15,6 +17,6 @@ app.get('/', (req, res) => {
 
 app.use('/facebook', facebookRouter);
 
-app.listen(3030, () => {
-  console.log('Magic bot server running on port 3000! 🦄 🤖');
+app.listen(port, () => {
+  console.log(`Magic bot server running on port ${port}! 🦄 🤖`);
 });
