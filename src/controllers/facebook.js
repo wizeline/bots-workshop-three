@@ -89,5 +89,6 @@ const callSendAPI = (message) => {
 };
 
 module.exports = {
-  getWebhook
+  getWebhook,
+  postWebhook
 };
